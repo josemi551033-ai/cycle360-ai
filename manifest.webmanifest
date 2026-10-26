@@ -1,0 +1,27 @@
+{
+  "id": "./",
+  "name": "CYCLE360 AI — Entrenamiento ciclista",
+  "short_name": "CYCLE360 AI",
+  "description": "Planificación ciclista, nutrición y seguimiento personal.",
+  "lang": "es-ES",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d120f",
+  "theme_color": "#101713",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

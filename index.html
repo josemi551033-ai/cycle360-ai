@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101713">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+<title>CYCLE360 AI — Tu ciclismo, en equilibrio</title>
+<style>
+:root{--bg:#0d120f;--panel:#151d18;--panel2:#1c2820;--line:#2b3a30;--text:#f2f6f0;--muted:#a1b0a4;--lime:#c8f169;--lime2:#a9d64b;--orange:#ff9b62;--blue:#8ed8ff;--radius:20px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#243523 0,transparent 42%),var(--bg);color:var(--text);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}
+.app{max-width:1400px;margin:auto;min-height:100vh;display:grid;grid-template-columns:245px 1fr}
+aside{padding:28px 18px;border-right:1px solid var(--line);background:#101713e8;position:sticky;top:0;height:100vh}
+.logo{display:flex;gap:10px;align-items:center;padding:0 10px 28px}.logo-mark{width:38px;height:38px;border-radius:12px;background:var(--lime);color:#14200f;display:grid;place-items:center;font-weight:950;font-size:20px}.logo strong{display:block;letter-spacing:.08em;font-size:15px}.logo small{color:var(--muted);font-size:10px;letter-spacing:.16em}
+.nav-label{color:#718176;font-size:10px;letter-spacing:.18em;font-weight:800;padding:14px 12px 8px}.nav{display:grid;gap:5px}.nav button{background:transparent;color:var(--muted);border:0;text-align:left;padding:12px;border-radius:12px;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:var(--panel2);color:var(--lime)}.nav .ico{width:22px;text-align:center;font-size:17px}.aside-bottom{position:absolute;bottom:22px;left:18px;right:18px}.coach-card{padding:15px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,#1e2b20,#131a15)}.coach-card b{font-size:13px}.coach-card p{font-size:12px;color:var(--muted);margin:7px 0 12px}.status{display:flex;align-items:center;gap:7px;color:var(--lime);font-size:11px}.dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px #c8f16977}
+main{padding:28px clamp(18px,3vw,44px) 50px;min-width:0}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:32px}.eyebrow{color:var(--lime);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.topbar h1{font-size:clamp(25px,3vw,36px);letter-spacing:-.04em;margin:5px 0 0}.top-actions{display:flex;align-items:center;gap:10px}.date-pill,.avatar{border:1px solid var(--line);background:var(--panel);padding:10px 13px;border-radius:12px;color:var(--muted);font-size:12px}.avatar{width:40px;height:40px;padding:0;display:grid;place-items:center;background:var(--lime);color:#172010;font-weight:900;border:0}
+.view{display:none}.view.active{display:block}.hero{display:grid;grid-template-columns:1.5fr .8fr;gap:18px;margin-bottom:20px}.hero-main{padding:27px;border-radius:var(--radius);background:linear-gradient(125deg,#c8f169 0%,#b6e65c 48%,#87bd46 100%);color:#182214;position:relative;overflow:hidden;min-height:255px}.hero-main:after{content:"🚴";position:absolute;right:15px;bottom:-34px;font-size:150px;opacity:.16;transform:rotate(-12deg)}.hero-main .eyebrow{color:#314923}.hero-main h2{font-size:clamp(26px,3vw,38px);line-height:1.08;max-width:460px;letter-spacing:-.04em;margin:13px 0}.hero-main p{max-width:400px;color:#304326;font-size:14px}.primary{border:0;background:#172215;color:var(--lime);font-weight:800;padding:12px 16px;border-radius:12px;box-shadow:0 6px 16px #17221520}.hero-main .primary{background:#172215;color:#e6ffc0;margin-top:8px}.hero-side{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;justify-content:space-between}.label{color:var(--muted);font-size:12px}.big-number{font-size:42px;font-weight:800;letter-spacing:-.06em;margin:6px 0}.big-number span{font-size:14px;color:var(--muted);font-weight:500;letter-spacing:0}.progress{height:7px;border-radius:99px;background:#2c3a30;overflow:hidden;margin:12px 0}.progress span{display:block;height:100%;width:62%;background:var(--lime);border-radius:99px}.split{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted)}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:28px 0 14px}.section-head h2{font-size:19px;letter-spacing:-.025em;margin:0}.section-head p{color:var(--muted);font-size:12px;margin:4px 0 0}.text-btn{border:0;background:none;color:var(--lime);font-size:12px;font-weight:800}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:18px}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.stat-icon{width:32px;height:32px;border-radius:10px;background:var(--panel2);display:grid;place-items:center;font-size:16px}.stat-value{font-size:27px;font-weight:800;letter-spacing:-.05em;margin:15px 0 2px}.stat-foot{font-size:11px;color:var(--muted)}.good{color:var(--lime)}
+.content-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:15px}.card-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.card-title h3{margin:0;font-size:15px}.tag{font-size:10px;padding:5px 8px;border-radius:7px;background:#2a382d;color:var(--lime);font-weight:800;white-space:nowrap}.workout{display:flex;gap:14px;align-items:center;padding:13px 0;border-top:1px solid var(--line)}.workout:first-of-type{border-top:0}.daybox{width:48px;height:52px;border-radius:12px;background:var(--panel2);display:grid;place-content:center;text-align:center;flex-shrink:0}.daybox small{font-size:9px;color:var(--muted);text-transform:uppercase}.daybox b{font-size:17px}.workout-info{flex:1;min-width:0}.workout-info b{font-size:13px;display:block}.workout-info small{font-size:11px;color:var(--muted)}.workout-right{text-align:right;font-size:12px;color:var(--muted)}.workout-right b{display:block;color:var(--text);font-size:13px}.meal{display:flex;gap:12px;align-items:center;margin:12px 0}.meal-emoji{width:44px;height:44px;border-radius:12px;background:var(--panel2);display:grid;place-items:center;font-size:22px}.meal-info{flex:1}.meal-info b{display:block;font-size:12px}.meal-info small{font-size:11px;color:var(--muted)}.meal-kcal{font-size:11px;color:var(--muted)}
+/* secondary screens */
+.page-intro{margin:5px 0 22px;color:var(--muted);max-width:720px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field{display:grid;gap:7px}.field label{font-size:12px;color:var(--muted)}.field input,.field select{width:100%;background:#101713;border:1px solid var(--line);border-radius:11px;color:var(--text);padding:12px;outline:none}.field input:focus,.field select:focus{border-color:var(--lime)}.form-actions{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}.secondary{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:11px 14px;border-radius:11px;font-weight:700}.result{margin-top:18px;padding:18px;border-radius:15px;background:#1c2b1d;border:1px solid #3a5530}.result h3{margin:0 0 8px}.result p,.result li{font-size:13px;color:#d3e1d0}.result ul{padding-left:20px}.route-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.route-card{padding:0;overflow:hidden}.route-visual{height:150px;background:#1c2d22;position:relative;overflow:hidden}.route-visual svg{width:100%;height:100%;display:block}.route-body{padding:17px}.route-body h3{margin:0 0 5px;font-size:15px}.route-body p{margin:0;color:var(--muted);font-size:12px}.route-meta{display:flex;gap:18px;margin:15px 0;color:var(--muted);font-size:11px}.route-meta b{color:var(--text);display:block;font-size:14px}.route-card .secondary{width:100%}.empty-note{color:var(--muted);font-size:12px;margin-top:10px}.week-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}.week-day{background:var(--panel);border:1px solid var(--line);border-radius:13px;min-height:135px;padding:11px 8px}.week-day small{color:var(--muted);font-size:10px}.week-day b{display:block;margin:5px 0 10px}.week-day span{font-size:10px;color:var(--lime);display:block}.week-day.rest span{color:var(--blue)}.notice{border:1px solid #54452c;background:#2a2419;color:#e6d1a6;border-radius:13px;padding:13px 15px;font-size:12px;margin-top:18px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--lime);color:#182214;font-weight:800;padding:12px 18px;border-radius:12px;box-shadow:0 10px 40px #0007;display:none;z-index:10}.footer-note{font-size:11px;color:#748177;margin-top:25px}
+@media(max-width:1000px){.app{grid-template-columns:80px 1fr}aside{padding:20px 10px}.logo{padding:0 10px 25px}.logo-text,.nav-label,.nav button .nav-text,.coach-card,.aside-bottom{display:none}.nav button{justify-content:center;padding:13px}.nav .ico{font-size:19px}.hero{grid-template-columns:1fr}.hero-side{min-height:180px}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.app{display:block;padding-bottom:70px}aside{position:fixed;z-index:5;top:auto;bottom:0;left:0;right:0;width:100%;height:64px;padding:6px 8px;border-right:0;border-top:1px solid var(--line);background:#101713f5}.logo,.nav-label{display:none}.nav{display:flex;justify-content:space-around;gap:0}.nav button{display:grid;gap:0;justify-items:center;padding:7px 5px;flex:1;border-radius:9px}.nav .ico{font-size:18px}.nav .nav-text{display:block!important;font-size:9px}.topbar{margin-bottom:22px;align-items:flex-start}.date-pill{display:none}main{padding:20px 15px 30px}.hero-main{padding:22px;min-height:250px}.hero-main:after{font-size:110px;right:0}.stats{gap:9px}.stat{padding:13px}.stat-value{font-size:23px}.stat-top{font-size:10px}.content-grid,.route-grid,.form-grid{grid-template-columns:1fr}.week-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.week-day{min-height:100px}.section-head{margin-top:24px}.topbar h1{font-size:25px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="logo"><div class="logo-mark">C</div><div class="logo-text"><strong>CYCLE360</strong><small>AI PERFORMANCE</small></div></div>
+  <div class="nav-label">MENÚ PRINCIPAL</div>
+  <nav class="nav" aria-label="Navegación">
+    <button class="active" data-view="dashboard"><span class="ico">◫</span><span class="nav-text">Inicio</span></button>
+    <button data-view="training"><span class="ico">ϟ</span><span class="nav-text">Entrenamiento</span></button>
+    <button data-view="nutrition"><span class="ico">◉</span><span class="nav-text">Nutrición</span></button>
+    <button data-view="routes"><span class="ico">⌁</span><span class="nav-text">Rutas</span></button>
+    <button data-view="profile"><span class="ico">◎</span><span class="nav-text">Mi perfil</span></button>
+  </nav>
+  <div class="aside-bottom"><div class="coach-card"><div class="status"><span class="dot"></span> SISTEMA LISTO</div><b>Tu copiloto ciclista</b><p>Pequeños pasos. Grandes puertos.</p></div></div>
+</aside>
+<main>
+<header class="topbar"><div><div class="eyebrow">TU CENTRO DE RENDIMIENTO</div><h1 id="page-title">Hola, ciclista 👋</h1></div><div class="top-actions"><div class="date-pill" id="today-label">TU ESPACIO DE CICLISMO</div><div class="avatar" id="avatar">C</div></div></header>
+
+<section class="view active" id="view-dashboard">
+  <div class="hero">
+    <div class="hero-main"><div class="eyebrow">CYCLE360 AI · PLAN PERSONAL</div><h2>Tu próxima mejor versión empieza hoy.</h2><p>Entrena con intención, recupera con cabeza y disfruta cada kilómetro. Tu plan, a tu ritmo.</p><button class="primary" data-go="training">Crear mi entrenamiento ↗</button></div>
+    <div class="hero-side"><div><div class="label">OBJETIVO SEMANAL</div><div class="big-number"><span id="weekly-hours">5.0</span><span> / 8 h</span></div><div class="progress"><span id="weekly-progress"></span></div><div class="split"><span>Horas planificadas</span><span id="weekly-percent">62%</span></div></div><div class="split"><span>🎯 Constancia antes que intensidad</span><span class="good">●</span></div></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-top"><span>Distancia semanal</span><span class="stat-icon">↗</span></div><div class="stat-value"><span id="km-stat">86</span> <small style="font-size:12px;color:var(--muted)">km</small></div><div class="stat-foot"><span class="good">Tu progreso</span> se construye salida a salida</div></div>
+    <div class="stat"><div class="stat-top"><span>Tiempo en bici</span><span class="stat-icon">◷</span></div><div class="stat-value" id="time-stat">5h 00m</div><div class="stat-foot">Objetivo: <span class="good">8 h / semana</span></div></div>
+    <div class="stat"><div class="stat-top"><span>Sesiones completadas</span><span class="stat-icon">✓</span></div><div class="stat-value"><span id="done-stat">2</span><small style="font-size:12px;color:var(--muted)"> / 4</small></div><div class="stat-foot">La recuperación también cuenta</div></div>
+    <div class="stat"><div class="stat-top"><span>Racha de constancia</span><span class="stat-icon">✳</span></div><div class="stat-value">3 <small style="font-size:12px;color:var(--muted)">días</small></div><div class="stat-foot"><span class="good">Buen trabajo</span> mantén el ritmo</div></div>
+  </div>
+  <div class="section-head"><div><h2>Tu semana</h2><p>Una estructura inicial que puedes adaptar a tu vida.</p></div><button class="text-btn" data-go="training">Ver planificación →</button></div>
+  <div class="content-grid">
+    <div class="card"><div class="card-title"><h3>Próximas sesiones</h3><span class="tag">PLAN BASE</span></div><div id="dashboard-workouts"></div></div>
+    <div class="card"><div class="card-title"><h3>Combustible para hoy</h3><span class="tag">NUTRICIÓN</span></div><div id="dashboard-meals"></div><button class="secondary" style="width:100%;margin-top:10px" data-go="nutrition">Ver recomendaciones</button></div>
+  </div>
+  <p class="footer-note">Prototipo funcional local: los datos se guardan en este navegador. No hay todavía sincronización entre dispositivos, GPS activo ni IA externa.</p>
+</section>
+
+<section class="view" id="view-training">
+  <div class="eyebrow">PLANIFICACIÓN ADAPTABLE</div><h2 style="font-size:28px;letter-spacing:-.04em;margin:7px 0">Entrenamiento inteligente</h2><p class="page-intro">Cuéntanos tu objetivo y disponibilidad. El planificador genera una propuesta orientativa con reglas básicas, no un diagnóstico ni una prescripción médica.</p>
+  <div class="card">
+    <div class="card-title"><h3>Personaliza tu semana</h3><span class="tag">PLANIFICADOR 360</span></div>
+    <div class="form-grid">
+      <div class="field"><label for="level">Nivel actual</label><select id="level"><option value="inicio">Estoy empezando</option><option value="medio" selected>Intermedio / salgo con frecuencia</option><option value="avanzado">Avanzado / entreno estructurado</option></select></div>
+      <div class="field"><label for="goal">Objetivo principal</label><select id="goal"><option value="base">Mejorar mi forma física</option><option value="fondo">Ganar fondo y resistencia</option><option value="subidas">Mejorar en subidas</option><option value="evento">Preparar una marcha o evento</option></select></div>
+      <div class="field"><label for="days">Días disponibles por semana</label><select id="days"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select></div>
+      <div class="field"><label for="hours">Horas semanales disponibles</label><select id="hours"><option value="3">2–3 horas</option><option value="5" selected>4–5 horas</option><option value="7">6–8 horas</option><option value="10">9–10 horas</option><option value="12">11+ horas</option></select></div>
+      <div class="field"><label for="rest">Día preferido de descanso</label><select id="rest"><option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option><option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo" selected>Domingo</option></select></div>
+      <div class="field"><label for="feeling">¿Cómo te encuentras hoy?</label><select id="feeling"><option value="bien">Con energía</option><option value="normal" selected>Normal</option><option value="cansado">Cansado/a o con poco sueño</option></select></div>
+    </div>
+    <div class="form-actions"><button class="primary" id="generate-plan">Generar mi plan semanal ↗</button><button class="secondary" id="save-plan">Guardar plan</button></div>
+    <div id="plan-result" aria-live="polite"></div>
+  </div>
+  <div class="notice">Seguridad: el plan es orientativo. Aumenta la carga gradualmente, evita sesiones intensas si estás enfermo/a o muy fatigado/a y consulta a un profesional si tienes una condición médica o síntomas preocupantes.</div>
+</section>
+
+<section class="view" id="view-nutrition">
+  <div class="eyebrow">ENERGÍA Y RECUPERACIÓN</div><h2 style="font-size:28px;letter-spacing:-.04em;margin:7px 0">Nutrición ciclista</h2><p class="page-intro">Ideas generales para organizar las comidas alrededor de la bici. Las necesidades cambian según la persona, el clima y la carga de entrenamiento.</p>
+  <div class="card"><div class="card-title"><h3>¿Qué tipo de día tienes?</h3><span class="tag">GUÍA PRÁCTICA</span></div>
+  <div class="form-grid"><div class="field"><label for="nutrition-day">Actividad de hoy</label><select id="nutrition-day"><option value="rest">Descanso / paseo suave</option><option value="short" selected>Entrenamiento hasta 90 minutos</option><option value="long">Salida larga de más de 90 minutos</option></select></div><div class="field"><label for="diet">Preferencia alimentaria</label><select id="diet"><option value="normal">Sin preferencia específica</option><option value="vegetarian">Vegetariana</option><option value="vegan">Vegana</option></select></div></div>
+  <div class="form-actions"><button class="primary" id="generate-meals">Preparar recomendaciones ↗</button></div><div id="nutrition-result"></div></div>
+  <div class="content-grid" style="margin-top:15px"><div class="card"><div class="card-title"><h3>Antes de salir</h3><span>🥣</span></div><p style="font-size:13px;color:var(--muted)">Si lo toleras bien, toma una comida rica en carbohidratos 2–3 horas antes de una sesión exigente. Para salidas cortas, puede bastar una comida habitual y un pequeño tentempié.</p></div><div class="card"><div class="card-title"><h3>Durante la ruta</h3><span>💧</span></div><p style="font-size:13px;color:var(--muted)">Lleva agua y bebe con regularidad. En salidas largas, planifica carbohidratos y electrolitos según duración, temperatura y tolerancia individual.</p></div></div>
+  <div class="notice">Estas recomendaciones no sustituyen el consejo de un dietista-nutricionista. No se calculan calorías ni dietas clínicas sin conocer necesidades individuales.</div>
+</section>
+
+<section class="view" id="view-routes">
+  <div class="eyebrow">EXPLORA Y PLANIFICA</div><h2 style="font-size:28px;letter-spacing:-.04em;margin:7px 0">Rutas para tu próxima salida</h2><p class="page-intro">Ejemplos de recorridos para inspirarte. Todavía no son rutas GPS verificadas ni se basan en tu ubicación en tiempo real.</p>
+  <div class="route-grid">
+    <div class="card route-card"><div class="route-visual"><svg viewBox="0 0 500 180" preserveAspectRatio="xMidYMid slice"><path d="M-20 140 C70 80 110 160 185 105 S300 45 350 105 S430 130 530 50" fill="none" stroke="#324d37" stroke-width="34"/><path d="M-20 140 C70 80 110 160 185 105 S300 45 350 105 S430 130 530 50" fill="none" stroke="#c8f169" stroke-width="3" stroke-dasharray="7 7"/><circle cx="185" cy="105" r="7" fill="#f4f8f0"/><circle cx="350" cy="105" r="7" fill="#ff9b62"/></svg></div><div class="route-body"><h3>Rodaje entre campos</h3><p>Ruta orientativa · terreno sencillo</p><div class="route-meta"><span><b>28 km</b>Distancia</span><span><b>+220 m</b>Desnivel</span><span><b>1 h 20</b>Estimación</span></div><button class="secondary route-add" data-route="Rodaje entre campos">Añadir a mis planes</button></div></div>
+    <div class="card route-card"><div class="route-visual"><svg viewBox="0 0 500 180" preserveAspectRatio="xMidYMid slice"><path d="M-20 160 L50 130 90 142 145 80 195 105 245 35 290 60 345 20 390 80 445 50 530 95" fill="none" stroke="#324d37" stroke-width="38"/><path d="M-20 160 L50 130 90 142 145 80 195 105 245 35 290 60 345 20 390 80 445 50 530 95" fill="none" stroke="#8ed8ff" stroke-width="3" stroke-dasharray="7 7"/><circle cx="245" cy="35" r="7" fill="#f4f8f0"/><circle cx="445" cy="50" r="7" fill="#ff9b62"/></svg></div><div class="route-body"><h3>Desafío de colinas</h3><p>Ruta orientativa · terreno ondulado</p><div class="route-meta"><span><b>42 km</b>Distancia</span><span><b>+650 m</b>Desnivel</span><span><b>2 h 10</b>Estimación</span></div><button class="secondary route-add" data-route="Desafío de colinas">Añadir a mis planes</button></div></div>
+    <div class="card route-card"><div class="route-visual"><svg viewBox="0 0 500 180" preserveAspectRatio="xMidYMid slice"><path d="M-10 40 Q90 110 160 60 T280 95 T510 40" fill="none" stroke="#324d37" stroke-width="40"/><path d="M-10 40 Q90 110 160 60 T280 95 T510 40" fill="none" stroke="#c8f169" stroke-width="3" stroke-dasharray="7 7"/><circle cx="160" cy="60" r="7" fill="#f4f8f0"/><circle cx="280" cy="95" r="7" fill="#ff9b62"/></svg></div><div class="route-body"><h3>Fondo de fin de semana</h3><p>Ruta orientativa · ritmo constante</p><div class="route-meta"><span><b>65 km</b>Distancia</span><span><b>+480 m</b>Desnivel</span><span><b>3 h 00</b>Estimación</span></div><button class="secondary route-add" data-route="Fondo de fin de semana">Añadir a mis planes</button></div></div>
+    <div class="card route-card"><div class="route-visual"><svg viewBox="0 0 500 180" preserveAspectRatio="xMidYMid slice"><path d="M-20 150 C30 150 50 30 130 70 S200 150 260 90 S340 10 400 60 S460 140 530 20" fill="none" stroke="#324d37" stroke-width="35"/><path d="M-20 150 C30 150 50 30 130 70 S200 150 260 90 S340 10 400 60 S460 140 530 20" fill="none" stroke="#ff9b62" stroke-width="3" stroke-dasharray="7 7"/><circle cx="130" cy="70" r="7" fill="#f4f8f0"/><circle cx="400" cy="60" r="7" fill="#ff9b62"/></svg></div><div class="route-body"><h3>Intervalos en terreno mixto</h3><p>Ruta orientativa · sesión de calidad</p><div class="route-meta"><span><b>24 km</b>Distancia</span><span><b>+300 m</b>Desnivel</span><span><b>1 h 15</b>Estimación</span></div><button class="secondary route-add" data-route="Intervalos en terreno mixto">Añadir a mis planes</button></div></div>
+  </div>
+  <div id="saved-routes" class="card" style="margin-top:16px;display:none"><div class="card-title"><h3>Mis rutas guardadas</h3><span class="tag">EN ESTE DISPOSITIVO</span></div><div id="saved-route-list"></div></div>
+  <div class="notice">Las distancias y desniveles son ejemplos ilustrativos. No uses estas tarjetas como instrucciones de navegación. La conexión a mapas y cálculo de rutas reales será una fase posterior.</div>
+</section>
+
+<section class="view" id="view-profile">
+  <div class="eyebrow">TU PUNTO DE PARTIDA</div><h2 style="font-size:28px;letter-spacing:-.04em;margin:7px 0">Mi perfil ciclista</h2><p class="page-intro">Guarda tus preferencias en este navegador para personalizar el prototipo.</p>
+  <div class="card"><div class="card-title"><h3>Datos del perfil</h3><span class="tag">GUARDADO LOCAL</span></div><div class="form-grid">
+    <div class="field"><label for="name">Nombre o apodo</label><input id="name" maxlength="40" placeholder="¿Cómo te llamamos?"></div>
+    <div class="field"><label for="profile-level">Nivel</label><select id="profile-level"><option value="Principiante">Principiante</option><option value="Intermedio">Intermedio</option><option value="Avanzado">Avanzado</option><option value="Competición">Competición</option></select></div>
+    <div class="field"><label for="profile-goal">Objetivo</label><select id="profile-goal"><option>Salud y forma física</option><option>Resistencia</option><option>Subidas</option><option>Marcha cicloturista</option><option>Competición</option></select></div>
+    <div class="field"><label for="weekly-goal">Objetivo semanal de horas</label><select id="weekly-goal"><option value="3">3 horas</option><option value="5" selected>5 horas</option><option value="8">8 horas</option><option value="10">10 horas</option><option value="12">12 horas</option></select></div>
+  </div><div class="form-actions"><button class="primary" id="save-profile">Guardar mi perfil</button><button class="secondary" id="reset-data">Borrar mis datos locales</button></div><p class="empty-note">No introduzcas información médica sensible. Los datos se almacenan solo en el almacenamiento local del navegador de este dispositivo.</p></div>
+</section>
+</main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const weekdays = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+const defaultState = {name:'',profileLevel:'Intermedio',profileGoal:'Salud y forma física',weeklyGoal:5,done:2,plan:null,routes:[]};
+let state = {...defaultState};
+try { const stored=localStorage.getItem('cycle360-state'); if(stored) state={...state,...JSON.parse(stored)}; } catch(e){}
+function persist(){try{localStorage.setItem('cycle360-state',JSON.stringify(state));}catch(e){}}
+function toast(msg){const el=$('#toast');el.textContent=msg;el.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.style.display='none',2500)}
+function todayString(){return new Intl.DateTimeFormat('es-ES',{weekday:'short',day:'numeric',month:'short'}).format(new Date()).toUpperCase()}
+$('#today-label').textContent=todayString();
+function titleFor(view){return ({dashboard:state.name?`Hola, ${state.name} 👋`:'Hola, ciclista 👋',training:'Tu plan de entrenamiento',nutrition:'Nutrición para rendir',routes:'Encuentra tu próxima ruta',profile:'Tu perfil ciclista'})[view]}
+function navigate(view){$$('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+view));$$('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.view===view));$('#page-title').textContent=titleFor(view);window.scrollTo({top:0,behavior:'smooth'})}
+$$('.nav button').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.view)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.go)));
+function workoutData(){
+ const rest=$('#rest')?.value||'Domingo';
+ const level=$('#level')?.value||'medio';
+ const days=Number($('#days')?.value||4);
+ const feeling=$('#feeling')?.value||'normal';
+ const names=['Rodaje fácil','Técnica y cadencia','Resistencia constante','Descanso / movilidad','Tempo controlado','Salida larga suave','Descanso'];
+ const types=['BASE','TÉCNICA','FONDO','RECUPERACIÓN','CALIDAD','FONDO','RECUPERACIÓN'];
+ let arr=weekdays.map((d,i)=>({day:d,name:names[i],type:types[i],hours:[.8,.6,1.2,0,1,1.4,0][i],rest:i===6}));
+ const restIndex=weekdays.indexOf(rest);
+ arr[restIndex]={day:rest,name:'Descanso / movilidad',type:'RECUPERACIÓN',hours:0,rest:true};
+ if(days<=3){[1,3,4].forEach(i=>{if(i!==restIndex)arr[i]={...arr[i],name:'Descanso o paseo suave',type:'RECUPERACIÓN',hours:0,rest:true}})}
+ if(days>=5 && restIndex!==3 && arr[3].rest) arr[3]={day:'Miércoles',name:'Rodaje regenerativo',type:'SUAVE',hours:.5,rest:false};
+ if(level==='inicio') arr=arr.map((x,i)=>({...x,hours:x.rest?0:Math.min(x.hours,.9),name:x.hours>1?'Rodaje cómodo':x.name}));
+ if(feeling==='cansado') arr=arr.map(x=>({...x,hours:x.hours>0?Math.max(.3,x.hours*.7):0,name:x.hours>0?'Rodaje muy suave':x.name,type:x.hours>0?'SUAVE':x.type}));
+ const total=arr.reduce((s,x)=>s+x.hours,0), target=Number($('#hours')?.value||5);
+ const scale=total>0?Math.min(1.25,target/total):1;
+ return arr.map(x=>({...x,hours:Math.round(x.hours*scale*10)/10}));
+}
+function renderWorkouts(arr){
+ const host=$('#dashboard-workouts');
+ host.innerHTML=arr.slice(0,5).map((w,i)=>`<div class="workout"><div class="daybox"><small>${w.day.slice(0,3)}</small><b>${i+1}</b></div><div class="workout-info"><b>${w.name}</b><small>${w.type} · ${w.rest?'Recuperar': 'Ritmo controlado'}</small></div><div class="workout-right"><b>${w.hours?`${w.hours.toFixed(1)} h`:'Libre'}</b>${w.rest?'Descanso':'En bici'}</div></div>`).join('');
+}
+function renderDashboard(){
+ const arr=state.plan||[
+ {day:'Lunes',name:'Rodaje fácil',type:'BASE',hours:1,rest:false},{day:'Martes',name:'Técnica y cadencia',type:'TÉCNICA',hours:.8,rest:false},{day:'Miércoles',name:'Resistencia constante',type:'FONDO',hours:1.5,rest:false},{day:'Jueves',name:'Descanso / movilidad',type:'RECUPERACIÓN',hours:0,rest:true},{day:'Viernes',name:'Tempo controlado',type:'CALIDAD',hours:1.2,rest:false},{day:'Sábado',name:'Salida larga suave',type:'FONDO',hours:1.5,rest:false},{day:'Domingo',name:'Descanso / movilidad',type:'RECUPERACIÓN',hours:0,rest:true}];
+ renderWorkouts(arr);
+ const sum=arr.reduce((s,w)=>s+(w.hours||0),0);$('#weekly-hours').textContent=sum.toFixed(1);const goal=Number(state.weeklyGoal||8);$('#weekly-progress').style.width=Math.min(100,sum/goal*100)+'%';$('#weekly-percent').textContent=Math.round(sum/goal*100)+'%';$('#km-stat').textContent=Math.round(sum*17);$('#time-stat').textContent=`${Math.floor(sum)}h ${String(Math.round((sum%1)*60)).padStart(2,'0')}m`;$('#done-stat').textContent=state.done||0;
+ const meals=[['🥣','Desayuno','Avena, fruta y yogur o alternativa',420],['🍌','Antes de la bici','Plátano y agua según tolerancia',150],['🍲','Comida','Arroz o patata, proteína y verduras',600]];
+ $('#dashboard-meals').innerHTML=meals.map(m=>`<div class="meal"><div class="meal-emoji">${m[0]}</div><div class="meal-info"><b>${m[1]}</b><small>${m[2]}</small></div></div>`).join('');
+}
+function renderPlan(){
+ const arr=workoutData();state.plan=arr;persist();
+ const total=arr.reduce((s,w)=>s+w.hours,0);
+ const target=Number($('#hours').value);const feeling=$('#feeling').value;
+ $('#plan-result').innerHTML=`<div class="result"><h3>Tu propuesta semanal</h3><p>${arr.filter(x=>x.hours>0).length} sesiones · ${total.toFixed(1)} horas aproximadas · objetivo disponible: ${target} h.</p><div class="week-grid">${arr.map(w=>`<div class="week-day ${w.rest?'rest':''}"><small>${w.day}</small><b>${w.rest?'Recuperación':w.hours.toFixed(1)+' h'}</b><span>${w.name}</span></div>`).join('')}</div><ul><li>Empieza cada sesión con 10–15 minutos suaves y termina progresivamente.</li><li>Las sesiones de calidad deben sentirse controladas; no hace falta ir al máximo.</li><li>${feeling==='cansado'?'Has indicado fatiga: reduce la carga y prioriza descanso, sueño e hidratación.':'Si el cansancio se acumula, cambia una sesión por descanso.'}</li></ul><p>Propuesta generada por reglas locales, no por una IA clínica o un entrenador profesional.</p></div>`;
+ renderDashboard();toast('Plan generado. Puedes guardarlo en este dispositivo.');
+}
+$('#generate-plan').addEventListener('click',renderPlan);
+$('#save-plan').addEventListener('click',()=>{if(!state.plan)renderPlan();persist();toast('Plan guardado en este navegador')});
+function generateMeals(){
+ const type=$('#nutrition-day').value,diet=$('#diet').value;
+ let protein=diet==='vegan'?'legumbres, tofu, tempeh o bebida de soja enriquecida':diet==='vegetarian'?'huevos, lácteos, legumbres o tofu':'huevos, yogur, legumbres, pescado o pollo';
+ let meals, during;
+ if(type==='rest'){meals=[['Desayuno','Avena con fruta y yogur o alternativa'],['Comida',`Patata o arroz, ${protein} y verduras`],['Cena','Verduras, pan integral y una fuente de proteína']];during='Agua según sed y condiciones. No necesitas comer como en una salida larga.'}
+ else if(type==='short'){meals=[['Antes','Tostada, avena o fruta según horario'],['Después',`Comida con carbohidratos y ${protein}`],['Resto del día','Comidas habituales variadas y suficiente líquido']];during='Lleva agua; para una sesión corta y suave suele bastar con hidratarte y comer normalmente antes y después.'}
+ else {meals=[['Antes','Comida conocida rica en carbohidratos 2–3 h antes si te sienta bien'],['Durante','Plátano, bocadillo pequeño o producto deportivo que ya toleres'],['Después',`Carbohidratos + ${protein} y líquidos para recuperar`]];during='En salidas largas, planifica bebida y aportes de carbohidratos; ajusta según duración, calor, tolerancia y asesoramiento profesional.'}
+ $('#nutrition-result').innerHTML=`<div class="result"><h3>Ideas para tu día</h3>${meals.map(m=>`<div class="meal"><div class="meal-emoji">🍽️</div><div class="meal-info"><b>${m[0]}</b><small>${m[1]}</small></div></div>`).join('')}<p><b>Hidratación y salida:</b> ${during}</p></div>`;
+}
+$('#generate-meals').addEventListener('click',generateMeals);
+function renderRoutes(){const host=$('#saved-routes');const list=$('#saved-route-list');if(!state.routes.length){host.style.display='none';return}host.style.display='block';list.innerHTML=state.routes.map(r=>`<div class="workout"><div class="daybox">⌁</div><div class="workout-info"><b>${r}</b><small>Ruta ilustrativa guardada</small></div><button class="secondary remove-route" data-route="${r}">Quitar</button></div>`).join('');$$('.remove-route').forEach(b=>b.addEventListener('click',()=>{state.routes=state.routes.filter(r=>r!==b.dataset.route);persist();renderRoutes();toast('Ruta quitada')}))}
+$$('.route-add').forEach(b=>b.addEventListener('click',()=>{if(!state.routes.includes(b.dataset.route))state.routes.push(b.dataset.route);persist();renderRoutes();toast('Ruta guardada en tu lista')}));
+function loadProfile(){ $('#name').value=state.name||'';$('#profile-level').value=state.profileLevel||'Intermedio';$('#profile-goal').value=state.profileGoal||'Salud y forma física';$('#weekly-goal').value=String(state.weeklyGoal||5);$('#avatar').textContent=(state.name||'C').trim().slice(0,1).toUpperCase();$('#page-title').textContent=titleFor('dashboard')}
+$('#save-profile').addEventListener('click',()=>{state.name=$('#name').value.trim();state.profileLevel=$('#profile-level').value;state.profileGoal=$('#profile-goal').value;state.weeklyGoal=Number($('#weekly-goal').value);persist();loadProfile();renderDashboard();toast('Perfil guardado')});
+$('#reset-data').addEventListener('click',()=>{if(confirm('¿Borrar el perfil, el plan y las rutas guardadas en este navegador?')){state={...defaultState,routes:[]};try{localStorage.removeItem('cycle360-state')}catch(e){}loadProfile();renderDashboard();renderRoutes();toast('Datos locales borrados')}});
+loadProfile();renderDashboard();renderRoutes();generateMeals();
+</script>
+
+<script>
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(err => console.warn('PWA offline setup:', err)));
+}
+</script>
+
+</body>
+</html>
